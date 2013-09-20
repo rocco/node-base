@@ -1,0 +1,15 @@
+extends layout
+block content
+
+	h2 Hello #{userData.name}, you are logged in!
+
+	- if(everyauth.facebook)
+		p You logged in via Facebook.
+
+	- if(everyauth.twitter)
+		p You logged in via Twitter.
+
+	h3 User Data in DB:
+	p= JSON.stringify(userData)
+
+	a(href='/logout') Log Out

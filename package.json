@@ -1,0 +1,42 @@
+{
+  "name": "node-base",
+  "description": "node.js base app using, express, everyauth, mongoose",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://github.com/rocco/node-base/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rocco/node-base.git"
+  },
+  "author": "Rocco Georgi <rocco@pavingways.com> (https://github.com/rocco/)",
+  "keywords": [
+    "nodejs",
+    "base",
+    "boilerplate",
+    "bootstrap",
+    "express",
+    "everyauth",
+    "mongoose",
+    "mongodb",
+    "example",
+    "authentication",
+    "facebook",
+    "twitter"
+  ],
+  "main": "./server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "everyauth": "0.4.x",
+    "express": "3.x",
+    "connect": "2.3.x",
+    "jade": "0.35.x",
+    "mongoose": "3.6.x",
+    "connect-mongo": "0.3.x"
+  },
+  "engines": {
+    "node": ">=0.10.12"
+  },
+  "optionalDependencies": {}
+}
