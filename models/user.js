@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /**
- * Schema
+ * User Schema
  */
 var UserSchema = Schema({
     name: String,
@@ -11,11 +11,9 @@ var UserSchema = Schema({
     email: String,
     username: String,
     facebook_id: String,
-    facebook: {}
-    /*,
+    facebook: {},
     twitter_id: String,
     twitter: {}
-    */
 });
 
 mongoose.model('UserModel', UserSchema);

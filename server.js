@@ -11,7 +11,7 @@ require('./models/user');
 var UserModel = mongoose.model('UserModel');
 
 /* everyauth setup */
-everyauth.debug = false;
+//everyauth.debug = false;
 
 everyauth.everymodule
 	.findUserById(function (userId, callback) {
@@ -87,7 +87,51 @@ everyauth
 		.consumerKey(conf.twit.consumerKey)
 		.consumerSecret(conf.twit.consumerSecret)
 		.findOrCreateUser(function (sess, accessToken, accessSecret, twitUser) {
-			return usersByTwitId[twitUser.id] || (usersByTwitId[twitUser.id] = addUser('twitter', twitUser));
+
+			// set up return promise
+			var promise = this.Promise();
+
+			// try to find user in DB using their fb data
+			UserModel.findOne({twitter_id: twitUser.id}, function (err, dbUser) {
+
+				// return promise early if there is an error
+				if (err) {
+					return promise.fulfill([err]);
+				}
+
+				// we found a user in db
+				if (dbUser) {
+
+					// fulfill promise with user data
+					promise.fulfill(dbUser);
+
+				} else {
+
+					// create a new user object
+					var newUser = new UserModel({
+						name: twitUser.name,
+						email: "", // no email from twitter :/ https://dev.twitter.com/discussions/4019
+						username: twitUser.screen_name,
+						twitter_id: twitUser.id,
+						twitter: twitUser
+					});
+
+					// try to save user object to db
+					newUser.save(function (err, newuser) {
+						// error - return promise early
+						if (err) {
+							return promise.fulfill([err]);
+						}
+
+						// success - fulfill promise with new user
+						promise.fulfill(newuser);
+					});
+				}
+
+			});
+
+			// return promise
+			return promise;
 		})
 		.redirectPath('/');
 
