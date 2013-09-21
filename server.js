@@ -11,8 +11,6 @@ require('./models/user');
 var UserModel = mongoose.model('UserModel');
 
 /* everyauth setup */
-//everyauth.debug = false;
-
 everyauth.everymodule
 	.findUserById(function (userId, callback) {
 		// we query by mongodb's unique object ID here 
@@ -139,14 +137,30 @@ everyauth
 /* express setup */
 var app = express();
 
-/* configure app */
+/* global app config */
+/* 
+node environment reminder: 
+--------------------------
+set environment variable NODE_ENV to "production" or "development" 
+or whatever you like (on console):
+$ export NODE_ENV=production
+
+check current value (on console):
+$ echo $NODE_ENV
+
+run app with temporary change: 
+$ NODE_ENV=testing node server.js
+
+from within app check via: process.env.NODE_ENV what the value is
+
+*/
 app.configure(function () {
-	/* set stuff */
+	/* set app config */
 	app
 		.set('view engine', 'jade')
 		/* ./views is the default, but still included for completeness */
 		.set('views', './views');
-	/* use stuff */
+	/* use stuff within application */
 	app
 		.use(express.favicon())
 		/* our static assets go here */
@@ -178,6 +192,23 @@ app.configure(function () {
 			next();
 		});
 });
+
+/* development app config */
+app.configure('development', function(){
+	// turn everyauth debug on
+	everyauth.debug = true;
+	// verbose express error handler
+	app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+});
+
+/* production app config */
+app.configure('production', function(){
+	// no everyauth debug output
+	everyauth.debug = false;
+	// quiet express error handler
+	app.use(express.errorHandler()); 
+});
+
 
 /* express controllers and routes */
 app.get('/', function (req, res) {
@@ -219,5 +250,7 @@ app.get('/app', function (req, res) {
 
 
 /* start listening */
-app.listen(3001);
-console.log('Go to http://whatever.local:3001');
+var appPort = process.env.PORT || 3001;
+app.listen(appPort);
+
+console.log('Server running on http://whatever.local:' + appPort + ', running in ' + process.env.NODE_ENV + ' mode');
