@@ -1,19 +1,28 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-
 /**
- * User Schema
+ * user model
  */
-var UserSchema = Schema({
-    name: String,
-    firstname: String,
-    lastname: String,
-    email: String,
-    username: String,
-    facebook_id: String,
-    facebook: {},
-    twitter_id: String,
-    twitter: {}
-});
+module.exports = function (mongoose) {
+	var UserSchema = new mongoose.Schema({
+		name: String,
+		firstname: String,
+		lastname: String,
+		email: String,
+		username: String,
+		facebook_id: String,
+		facebook: {},
+		twitter_id: String,
+		twitter: {}
+		// add more everyauth provider specific properties here
+	});
 
-mongoose.model('UserModel', UserSchema);
+	// add methods to the schema here if needed
+	UserSchema.methods.dumpName = function (preText) {
+		console.log(preText + this.name);
+	}
+
+	// register the model UserModel to mongoose using the UserSchema schema
+	mongoose.model('UserModel', UserSchema);
+
+	// return the model
+	return mongoose.model('UserModel');
+};

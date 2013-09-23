@@ -2,14 +2,18 @@ extends layout
 block content
 
 	h2 Hello #{userData.name}, you are logged in!
-
+	
 	- if(everyauth.facebook)
 		p You logged in via Facebook.
 
 	- if(everyauth.twitter)
 		p You logged in via Twitter.
 
-	h3 User Data in DB:
+	h3 User Data in DB
 	p= JSON.stringify(userData)
+
+	h3 Session User Id
+	p= JSON.stringify(userId)
+	p This variable was set from our custom middleware to res.locals.userId and thus becomes available in this view.
 
 	a(href='/logout') Log Out
