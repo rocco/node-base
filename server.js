@@ -1,3 +1,5 @@
+'use strict';
+
 /* load all dependencies */
 var config     = require('./config'), // loads ./config/index.js
 	everyauth  = require('everyauth'),
@@ -23,7 +25,7 @@ require('./config/everyauth.js')(everyauth, config, mongoose);
 /* express app setup */
 var app = express();
 
-/* global app config */
+/* the global app config */
 /* 
 node environment reminder: 
 --------------------------
@@ -63,31 +65,32 @@ app.configure(function () {
 		.use(express.cookieParser('some cookie secret'))
 		// persistent sessions - these go to the existing db connection
 		.use(express.session({
-				secret: 'some session secret',
-				/* sessions should be auto-cleaned from mongodb after they expire - one day here */
-				maxAge: new Date(Date.now() + (1 * 24 * 60 * 60)),
-				store: new mongostore(
-					/* existig db connection is used */
-					{
-						db: mongoose.connection.db
-					},
-					function (err) {
-						console.log('connect-mongo setup error: ', err);
-					}
-				)
-		}))
+			secret: 'some session secret',
+			/* sessions should be auto-cleaned from mongodb after they expire - one day here */
+			maxAge: new Date(Date.now() + (1 * 24 * 60 * 60)),
+			store: new mongostore(
+				/* existig db connection is used */
+				{
+					db: mongoose.connection.db
+				},
+				function (err) {
+					console.log('connect-mongo setup error: ', err);
+				}
+			)
+			}
+		))
 		// CSRF protection - use a hidden form input named "_csrf"
 		.use(express.csrf())
 		// this needs to go after the session stuff
 		.use(everyauth.middleware())
 		// a simple custom middleware
 		.use(function (req, res, next) {
-			// usually you do stuff here with req data and put it to res
-			res.locals.userId = req.session && req.session.auth && req.session.auth.userId;
-			console.log('custom middleware reached', res.locals.userId);
-
-			next();
-		});
+				// usually you do stuff here with req data and put it to res
+				res.locals.userId = req.session && req.session.auth && req.session.auth.userId;
+				console.log('custom middleware reached', res.locals.userId);
+				next();
+			}
+		);
 		// note: no .use(app.router) here due to everyauth
 });
 
@@ -101,7 +104,7 @@ app.configure('development', function () {
 	app.use(express.errorHandler({
 		dumpExceptions: true,
 		showStack: true
-	})); 
+	}));
 });
 
 /* production app config */
@@ -111,7 +114,7 @@ app.configure('production', function () {
 	everyauth.debug = false;
 
 	// quiet express error handler
-	app.use(express.errorHandler()); 
+	app.use(express.errorHandler());
 });
 
 
