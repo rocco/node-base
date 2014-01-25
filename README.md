@@ -1,6 +1,8 @@
 node-base
 =========
 
+[![Build Status](https://travis-ci.org/rocco/node-base.png?branch=emailauth)](https://travis-ci.org/rocco/node-base)
+
 This is a basic node.js app using
 
 - "express" (duh) with jade templates (easily changeable)

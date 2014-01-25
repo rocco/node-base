@@ -152,3 +152,5 @@ var appPort = process.env.PORT || 3001;
 app.listen(appPort);
 
 console.log('server on http://localhost.com:' + appPort + ' started running in ' + process.env.NODE_ENV + ' mode');
+
+module.exports = app;
