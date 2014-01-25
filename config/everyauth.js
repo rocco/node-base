@@ -27,6 +27,7 @@ module.exports = function (everyauth, config, mongoose) {
 				});
 			});
 
+
 	/* local username / password form */
 	everyauth
 		.password
@@ -110,7 +111,7 @@ module.exports = function (everyauth, config, mongoose) {
 			// a new user is finally actually added using data in newUserAttrs
 			.registerUser(function (newUserAttrs) {
 				var login = newUserAttrs[this.loginKey()],
-				    newUser = newUserAttrs;
+					newUser = newUserAttrs;
 
 				console.log('adding a new user:', login, newUser);
 
@@ -152,7 +153,7 @@ module.exports = function (everyauth, config, mongoose) {
 
 
 
-
+	/* facebook */
 	everyauth
 		.facebook
 			.appId(config.everyauth.facebook.appId)
@@ -208,6 +209,8 @@ module.exports = function (everyauth, config, mongoose) {
 			})
 			.redirectPath('/');
 
+
+	/* twitter */
 	everyauth
 		.twitter
 			.consumerKey(config.everyauth.twitter.consumerKey)
