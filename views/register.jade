@@ -1,0 +1,28 @@
+extends layout
+block content
+
+	h2 Register
+
+	- if ('undefined' !== typeof errors && errors.length)
+		ul#errors
+			- each error in errors
+				li.error= error
+
+	form(action='/register', method='post')
+
+		#login
+			label(for=everyauth.password.loginFormFieldName) Login
+			input(type='text', name=everyauth.password.loginFormFieldName, value=userParams[everyauth.password.loginFormFieldName])
+
+		#password
+			label(for=everyauth.password.passwordFormFieldName) Password
+			input(type='password', name=everyauth.password.passwordFormFieldName)
+
+		#passwordagain
+			label(for=everyauth.password.passwordFormFieldName) Password Again
+			input(type='password', name=passwordagain)
+
+		#submit
+			input(type='submit', value='Register')
+
+	a(href='/login') Have an account? Login!

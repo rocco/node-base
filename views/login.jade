@@ -1,0 +1,27 @@
+extends layout
+block content
+
+	h2 Login
+
+	- if (typeof errors !== 'undefined' && errors.length)
+		ul#errors
+			- each error in errors
+				li.error= error
+
+	form(action='/login', method='post')
+
+		#token
+			input(type="hidden", name="_csrf", value="#{csrftoken}")
+
+		#login
+			label(for=everyauth.password.loginFormFieldName) User Name
+			input(type='text', name=everyauth.password.loginFormFieldName, value=email)
+
+		#password
+			label(for=everyauth.password.passwordFormFieldName) Password
+			input(type='password', name=everyauth.password.passwordFormFieldName)
+
+		#submit
+			input(type='submit', value='Login')
+
+	a(href='/register') No account? Register!

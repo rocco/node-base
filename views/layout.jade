@@ -1,5 +1,6 @@
-doctype 5
+doctype
 html
+
 	head
 		title node-base
 
@@ -7,7 +8,14 @@ html
 		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 
 		//- load a resource from our www folder
-		script(type="text/javascript", src="js/client.js")
+		script(type="text/javascript", src="/js/client.js")
+
 	body
+		ul#menu
+			li: a(href='/app') App Home
+
+			if userId
+				li: a(href='/user') User Data for #{user.name}
+				li: a(href='/logout') Log Out
 
 		block content

@@ -1,5 +1,3 @@
-'use strict';
-
 /* load all dependencies */
 var config     = require('./config'), // loads ./config/index.js
 	everyauth  = require('everyauth'),
@@ -42,6 +40,7 @@ $ NODE_ENV=testing node server.js
 from within app check via: process.env.NODE_ENV what the current value is
 */
 app.configure(function () {
+	'use strict';
 
 	/* set app config */
 	app.set('view engine', 'jade')
@@ -80,22 +79,35 @@ app.configure(function () {
 			}
 		))
 		// CSRF protection - use a hidden form input named "_csrf"
+		// needs to go below session() and cookieParser(), 
+		// cf. http://www.senchalabs.org/connect/csrf.html
 		.use(express.csrf())
-		// this needs to go after the session stuff
-		.use(everyauth.middleware())
 		// a simple custom middleware
+		// this is used here to add the CSRF token to our views
 		.use(function (req, res, next) {
-				// usually you do stuff here with req data and put it to res
+
+				/* do stuff here with req data and put it to res, then call next() */
+
+				// get the CSRF token and make it available in all views by attaching it to res.locals
+				res.locals.csrftoken = req.csrfToken();
+
+				// optionally add CSRF token to session cookie liek this
+				//res.cookie('XSRF-TOKEN', res.locals.csrftoken);
+
+				// make userId universally available in views
 				res.locals.userId = req.session && req.session.auth && req.session.auth.userId;
-				console.log('custom middleware reached', res.locals.userId);
+
 				next();
 			}
-		);
+		)
+		// this needs to go after the session stuff
+		.use(everyauth.middleware());
 		// note: no .use(app.router) here due to everyauth
 });
 
 /* development app config */
 app.configure('development', function () {
+	'use strict';
 
 	// turn everyauth debug on
 	everyauth.debug = true;
@@ -109,6 +121,7 @@ app.configure('development', function () {
 
 /* production app config */
 app.configure('production', function () {
+	'use strict';
 
 	// no everyauth debug output
 	everyauth.debug = false;
@@ -121,12 +134,17 @@ app.configure('production', function () {
 /* express routes and "controllers" */
 
 // note the () after the require()
-// this is needed due to the module returning a function object that return the actual function
-// in thecase if index thisseems bloated but it's better to do this consistently across all controllers
-app.get('/',    require('./controllers/index')());
+// this is needed due to the module returning a function object that returns the actual function
+// in the case of index this seems bloated but it's better to do this consistently across all controllers
 
-// /app need the mongoose object, so we pass it into the function call
-app.get('/app', require('./controllers/app')(mongoose));
+// also if the view would need an object, e.g. mongoose, we pass it in to the function call like this (commented out)
+app.get('/', require('./controllers/index')(/* mongoose */));
+
+// app view
+app.get('/app', require('./controllers/app')());
+
+// user view
+app.get('/user', require('./controllers/user')(mongoose));
 
 
 /* start listening */
