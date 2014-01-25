@@ -6,5 +6,6 @@
     "strict": true,
     "undef": true,
     "unused": true,
-    "white": true
+    "white": true,
+    "curly": true
 }
