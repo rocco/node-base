@@ -155,14 +155,13 @@ app.configure('production', function () {
 // note the () after the require()
 // this is needed due to the module returning a function object that returns the actual function
 // in the case of index this seems bloated but it's better to do this consistently across all controllers
-
-// also if the view would need an object, e.g. mongoose, we pass it in to the function call like this (commented out)
-app.get('/', require('./controllers/index')(/* mongoose */));
+app.get('/', require('./controllers/index')());
 
 // app view
 app.get('/app', require('./controllers/app')());
 
 // user view
+// note that we pass in ther mongoose object to this controller
 app.get('/user', require('./controllers/user')(mongoose));
 
 
