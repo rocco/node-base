@@ -45,10 +45,12 @@ please make sure you serve the app through your localhost accessible via localho
 
 - do a "npm update" within this directory to load dependencies to ./node_modules/
 - add hosts entry: localhost.com (then you can use the provided oauth keys)
-- make sure mongodb is running on 127.0.0.1 (or change in config/index.js), run "mongod" to start the daemon
-- maybe set NODE_ENV environment var, see server.js source
-- start the node-base app with "node server.js"
+- make sure mongodb is running on 127.0.0.1 (change in config/index.js): run `mongod &` to start the daemon
+- maybe set NODE_ENV environment var, see server.js source (falls back to "development")
+- start the node-base app with `node server.js`
+	- even better install nodemon: `npm install -g nodemon`, then run `nodemon server.js`
 - navigate to http://localhost.com:3001 (or whatever your localhost points to)
+
 
 ### Inspired by and hacked together using
 

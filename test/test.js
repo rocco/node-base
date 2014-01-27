@@ -1,3 +1,4 @@
+/*global describe, before, it */
 var request = require('supertest');
 var should = require('should');
 

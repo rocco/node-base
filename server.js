@@ -18,7 +18,7 @@ if (['development', 'testing', 'production'].indexOf(appMode) < 0) {
 process.on('SIGINT', function () {
 	'use strict';
 
-	console.log('\nnode-base exist ... bye\n');
+	console.log('\nnode-base exits ... bye\n');
 	process.exit(0);
 });
 
@@ -77,7 +77,7 @@ app.configure(function () {
 		.use(express.bodyParser())
 		// change secret here
 		.use(express.cookieParser('some cookie secret here'))
-		// persistent sessions - these go to the existing db connection
+		// persistent sessions - these go to our existing db connection
 		.use(express.session({
 			secret: 'some session secret here',
 			// session lifetime: one day
@@ -86,7 +86,7 @@ app.configure(function () {
 			// stored sessions are cleaned using mongodb's mechanism (at the most once every minute)
 			// see: https://npmjs.org/package/connect-mongo
 			store: new MongoStore({
-					// existig db connection is used
+					// existig mongoose_connection is used
 					mongoose_connection: mongoose.connection
 				},
 				function (/* dbObj */) {
