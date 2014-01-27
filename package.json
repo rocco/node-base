@@ -1,49 +1,52 @@
 {
-  "name": "node-base",
-  "description": "node.js base app using, express, everyauth, mongoose",
-  "version": "0.2.1",
-  "private": true,
-  "homepage": "https://github.com/rocco/node-base/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rocco/node-base.git"
-  },
-  "author": "Rocco Georgi <rocco@pavingways.com> (https://github.com/rocco/)",
-  "keywords": [
-    "nodejs",
-    "base",
-    "boilerplate",
-    "bootstrap",
-    "express",
-    "everyauth",
-    "mongoose",
-    "mongodb",
-    "example",
-    "authentication",
-    "facebook",
-    "twitter"
-  ],
-  "main": "./server.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "engines": {
-    "node": ">=0.10.12"
-  },
-  "dependencies": {
-    "everyauth": "0.4.x",
-    "express": "3.x",
-    "connect": "2.3.x",
-    "jade": "1.x",
-    "mongoose": "3.6.x",
-    "connect-mongo": "0.3.x"
-  },
-  "devDependencies": {
-    "should": "~2.1.1",
-    "supertest": "~0.8.2",
-    "grunt": "~0.4.2",
-    "grunt-mocha-test": "~0.8.1",
-    "grunt-contrib-jshint": "~0.8.0"
-  },
-  "optionalDependencies": {}
+	"name": "node-base",
+	"description": "node.js base app using, express, everyauth, mongoose",
+	"version": "0.2.1",
+	"private": true,
+	"homepage": "https://github.com/rocco/node-base/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rocco/node-base.git"
+	},
+	"author": "Rocco Georgi <rocco@pavingways.com> (https://github.com/rocco/)",
+	"keywords": [
+		"nodejs",
+		"base",
+		"boilerplate",
+		"bootstrap",
+		"express",
+		"everyauth",
+		"mongoose",
+		"mongodb",
+		"example",
+		"authentication",
+		"facebook",
+		"twitter"
+	],
+	"main": "./server.js",
+	"directories": {
+		"lib": "lib"
+	},
+	"engines": {
+		"node": ">=0.10.12"
+	},
+	"dependencies": {
+		"everyauth": "0.4.x",
+		"express": "3.x",
+		"connect": "2.3.x",
+		"jade": "1.x",
+		"mongoose": "3.6.x",
+		"connect-mongo": "0.4.x"
+	},
+	"devDependencies": {
+		"should": "~2.1.1",
+		"supertest": "~0.8.2",
+		"grunt": "~0.4.2",
+		"grunt-mocha-test": "~0.8.1",
+		"grunt-contrib-jshint": "~0.8.0"
+	},
+	"optionalDependencies": {},
+	"scripts": {
+		"test": "grunt test"
+	}
 }

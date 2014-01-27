@@ -1,6 +1,11 @@
 /* mongoose config */
 module.exports = function (mongoose, config) {
 
+	// mongoose event handlers
+	mongoose.connection.on('error', function (err) {
+		console.log('mongoose error: ', err);
+	});
+
 	// connect mongodb as defined in config
 	mongoose.connect(config.mongodb.server, function (err) {
 		if (err) {

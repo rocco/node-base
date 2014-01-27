@@ -2,19 +2,19 @@
 var config     = require('./config'), // loads ./config/index.js
 	everyauth  = require('everyauth'),
 	express    = require('express'),
-	mongostore = require('connect-mongo')(express),
-	mongoose   = require('mongoose');
-
-
-/* connect mongodb */
-require('./config/mongoose.js')(mongoose, config);
+	MongoStore = require('connect-mongo')(express),
+	mongoose   = require('mongoose'),
+	appPort    = process.env.PORT || 3001,
+	appMode    = process.env.NODE_ENV || 'development';
 
 /* load models */
 // to stay consistent and to match mongoose.model('SomethingModel')
 // ./models/user should be assigned to UserModel,
 // ./models/something to SomethingModel etc.
-require('./models/user')(mongoose);
+require('./models/user.js')(mongoose);
 
+/* connect mongodb */
+require('./config/mongoose.js')(mongoose, config);
 
 /* everyauth setup */
 require('./config/everyauth.js')(everyauth, config, mongoose);
@@ -61,19 +61,23 @@ app.configure(function () {
 		// support JSON, urlencoded, and multipart requests - see express api docs
 		.use(express.bodyParser())
 		// change secret here
-		.use(express.cookieParser('some cookie secret'))
+		.use(express.cookieParser('some cookie secret here'))
 		// persistent sessions - these go to the existing db connection
 		.use(express.session({
-			secret: 'some session secret',
-			/* sessions should be auto-cleaned from mongodb after they expire - one day here */
+			secret: 'some session secret here',
+			// session lifetime: one day
 			maxAge: new Date(Date.now() + (1 * 24 * 60 * 60)),
-			store: new mongostore(
-				/* existig db connection is used */
-				{
-					db: mongoose.connection.db
+			// MongoStore stores our session to mongodb
+			// stored sessions are cleaned using mongodb's mechanism (at the most once every minute)
+			// see: https://npmjs.org/package/connect-mongo
+			store: new MongoStore({
+					// existig db connection is used
+					mongoose_connection: mongoose.connection
 				},
-				function (err) {
-					console.log('connect-mongo setup error: ', err);
+				function (/* dbObj */) {
+					// this is executed after theMongoStore connects
+					// useful for testing
+					// the db connection object is passed in
 				}
 			)
 			}
@@ -148,9 +152,8 @@ app.get('/user', require('./controllers/user')(mongoose));
 
 
 /* start listening */
-var appPort = process.env.PORT || 3001;
 app.listen(appPort);
 
-console.log('server on http://localhost.com:' + appPort + ' started running in ' + process.env.NODE_ENV + ' mode');
+console.log('server on http://localhost.com:' + appPort + ' started running in ' + appMode + ' mode');
 
 module.exports = app;

@@ -1,10 +1,4 @@
 language: node_js
-branches:
-  only:
-    - master
-    - emailauth
 node_js:
-  - "0.10"
+  - "0.10.12"
 services: mongodb
-before_script:
-  - npm install -g grunt-cli
