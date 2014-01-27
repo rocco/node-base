@@ -2,7 +2,7 @@ var request = require('supertest');
 var should = require('should');
 
 /* set env before loading the server */
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'testing';
 
 /* load our server */
 var server = require('../server.js');
@@ -24,8 +24,6 @@ describe('node-base', function () {
 			.end(function (err, res) {
 				res.statusCode.should.equal(200);
 				res.text.should.include('<h2>Not Authenticated</h2>');
-
-
 				done();
 			});
 	});

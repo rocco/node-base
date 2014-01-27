@@ -3,18 +3,26 @@ node-base
 
 [![Build Status](https://travis-ci.org/rocco/node-base.png?branch=emailauth)](https://travis-ci.org/rocco/node-base)
 
-This is a basic node.js app using
+This is an example node.js app using:
 
 - "express" (duh) with jade templates (easily changeable)
 - "everyauth" for various authentication possibilities (we cover facebook and twitter)
 - "mongoose" for mongodb connectivity
 - "connect-mongo" for persistent sessions
 
-Features:
+The project also tries to include a complete setup including things like:
+
+- environment differences (development, testing, production)
+- jshint setup (but its setup really depends on your preferences)
+- mocha tests using supertest (which is based on super-agent)
+- grunt for running jshint, tests etc.
+- travis-ci setup (see the build status image above)
+
+### Features
 
 - extensive inline documentation trying to make clear whats going on
 - clean and simple structure with config, controllers, models and views
-- facebook and twitter authentication through everyauth
+- username/password, facebook and twitter authentication through everyauth
 - users are stored in mongodb
 - persistent sessions in mongodb (you're still logged in after server reboots)
 - express config examples for development and production modes
@@ -24,7 +32,16 @@ Features:
 - loading of static assets
 - custom favicon
 
-Getting started:
+### Getting started
+
+If you want to use my existing node-base-apps on facebook and twitter to login using their OAuth mechanism, 
+please make sure you serve the app through your localhost accessible via localhost.com!
+
+**You need to make an /etc/hosts entry for localhost.com like this**:
+
+    127.0.0.1    localhost    local.host    localhost.com
+
+#### Other necessary steps
 
 - do a "npm update" within this directory to load dependencies to ./node_modules/
 - add hosts entry: localhost.com (then you can use the provided oauth keys)
@@ -33,7 +50,7 @@ Getting started:
 - start the node-base app with "node server.js"
 - navigate to http://localhost.com:3001 (or whatever your localhost points to)
 
-Inspired by and hacked together using:
+### Inspired by and hacked together using
 
 - http://nodejs.org/api/
 - http://expressjs.com/api.html

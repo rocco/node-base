@@ -8,7 +8,7 @@ var config     = require('./config/index.js'), // loads ./config/index.js
 	appMode    = process.env.NODE_ENV || 'development';
 
 /* make sure appMode (process.env.NODE_ENV) is set */
-if (['development', 'test', 'production'].indexOf(appMode) < 0) {
+if (['development', 'testing', 'production'].indexOf(appMode) < 0) {
 	console.log('appMode not set, make sure you set process.env.NODE_ENV! exiting early ... \n');
 	// exit with a 'failure' code
 	process.exit(1);
@@ -170,4 +170,5 @@ app.listen(appPort);
 
 console.log('server on http://localhost.com:' + appPort + ' started running in ' + appMode + ' mode');
 
+/* by exposing app like this we can require it in other places like tests */
 module.exports = app;

@@ -7,7 +7,7 @@ module.exports = {
 		development: {
 			server: 'mongodb://127.0.0.1/node-base'
 		},
-		test: {
+		testing: {
 			server: 'mongodb://127.0.0.1/node-base-test'
 		},
 		production: {
