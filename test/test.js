@@ -1,7 +1,7 @@
 var request = require('supertest');
 var should = require('should');
 
-/* ser env before loading the server */
+/* set env before loading the server */
 process.env.NODE_ENV = 'test';
 
 /* load our server */
