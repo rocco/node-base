@@ -1,11 +1,26 @@
 /* load all dependencies */
-var config     = require('./config'), // loads ./config/index.js
+var config     = require('./config/index.js'), // loads ./config/index.js
 	everyauth  = require('everyauth'),
 	express    = require('express'),
 	MongoStore = require('connect-mongo')(express),
 	mongoose   = require('mongoose'),
 	appPort    = process.env.PORT || 3001,
 	appMode    = process.env.NODE_ENV || 'development';
+
+/* make sure appMode (process.env.NODE_ENV) is set */
+if (['development', 'test', 'production'].indexOf(appMode) < 0) {
+	console.log('appMode not set, make sure you set process.env.NODE_ENV! exiting early ... \n');
+	// exit with a 'failure' code
+	process.exit(1);
+}
+
+/* handle CTRL-C exits */
+process.on('SIGINT', function () {
+	'use strict';
+
+	console.log('\nnode-base exist ... bye\n');
+	process.exit(0);
+});
 
 /* load models */
 // to stay consistent and to match mongoose.model('SomethingModel')
@@ -14,7 +29,7 @@ var config     = require('./config'), // loads ./config/index.js
 require('./models/user.js')(mongoose);
 
 /* connect mongodb */
-require('./config/mongoose.js')(mongoose, config);
+require('./config/mongoose.js')(mongoose, config, appMode);
 
 /* everyauth setup */
 require('./config/everyauth.js')(everyauth, config, mongoose);

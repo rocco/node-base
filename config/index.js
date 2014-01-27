@@ -3,7 +3,16 @@ module.exports = {
 
 	// mongodb config
 	mongodb: {
-		server: 'mongodb://127.0.0.1/node-base'
+		// one setup object for each environment
+		development: {
+			server: 'mongodb://127.0.0.1/node-base'
+		},
+		test: {
+			server: 'mongodb://127.0.0.1/node-base-test'
+		},
+		production: {
+			server: 'mongodb://127.0.0.1/node-base-prod'
+		}
 	},
 
 	// everyauth config

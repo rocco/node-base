@@ -1,5 +1,5 @@
 /* mongoose config */
-module.exports = function (mongoose, config) {
+module.exports = function (mongoose, config, env) {
 
 	// mongoose event handlers
 	mongoose.connection.on('error', function (err) {
@@ -7,14 +7,13 @@ module.exports = function (mongoose, config) {
 	});
 
 	// connect mongodb as defined in config
-	mongoose.connect(config.mongodb.server, function (err) {
+	mongoose.connect(config.mongodb[env].server, function (err) {
 		if (err) {
-			console.log('could not connect to MongoDB at ' + config.mongodb.server);
+			console.log('could not connect to MongoDB at ' + config.mongodb[env].server);
 			throw err;
 		}
 		// that worked
-		console.log('connected to MongoDB at ' + config.mongodb.server);
+		console.log('connected to MongoDB at ' + config.mongodb[env].server);
 	});
 
-	// complete db object is now accessible via mongoose.connection.db
 };
