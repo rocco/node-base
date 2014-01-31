@@ -1,7 +1,7 @@
 node-base
 =========
 
-[![Build Status](https://travis-ci.org/rocco/node-base.png?branch=emailauth)](https://travis-ci.org/rocco/node-base)
+[![Build Status](https://travis-ci.org/rocco/node-base.png?branch=master)](https://travis-ci.org/rocco/node-base)
 
 This is an example node.js app using:
 
