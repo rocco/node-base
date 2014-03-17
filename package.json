@@ -28,7 +28,7 @@
 		"lib": "lib"
 	},
 	"engines": {
-		"node": ">=0.10.12"
+		"node": ">=0.10.21"
 	},
 	"dependencies": {
 		"everyauth": "0.4.x",
