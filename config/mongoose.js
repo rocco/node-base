@@ -1,6 +1,7 @@
 /* mongoose config */
 module.exports = function (mongoose, config, env) {
-
+	'use strict';
+	
 	// mongoose event handlers
 	mongoose.connection.on('error', function (err) {
 		console.log('mongoose error: ', err);

@@ -2,6 +2,8 @@
  * user model
  */
 module.exports = function (mongoose) {
+	'use strict';
+
 	var UserSchema = new mongoose.Schema({
 		name: String,
 		firstname: String,
@@ -18,7 +20,7 @@ module.exports = function (mongoose) {
 	// add methods to the schema here if needed
 	UserSchema.methods.dumpName = function (preText) {
 		console.log(preText + this.name);
-	}
+	};
 
 	// register the model UserModel to mongoose using the UserSchema schema
 	mongoose.model('UserModel', UserSchema);
