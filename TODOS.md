@@ -24,4 +24,4 @@ Maybes:
 - "connect-redis" as example?
 - "remember me" option on login http://stackoverflow.com/questions/244882/what-is-the-best-way-to-implement-remember-me-for-a-website
 - lockit evaluation/integration
-
+- force "set email" when logging in via Facebook
