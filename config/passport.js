@@ -40,6 +40,7 @@ module.exports = function (passport, config, UserModel) {
 								UserModel.findById(req.user.id, function (err, ExistingUser) {
 									ExistingUser.twitter_id = profile.id;
 									ExistingUser.twitter = profile;
+									ExistingUser.name = profile.displayName;
 									ExistingUser.save(function (err) {
 										console.log('Twitter account has been linked to currently logged in user');
 										done(err, ExistingUser);
@@ -61,6 +62,7 @@ module.exports = function (passport, config, UserModel) {
 							newUser.email = '';
 							newUser.twitter_id = profile.id;
 							newUser.twitter = profile;
+							newUser.name = profile.displayName;
 							newUser.save(function (err) {
 								done(err, newUser);
 							});

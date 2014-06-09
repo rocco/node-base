@@ -1,11 +1,6 @@
 TODOS
 =====
 
-Bugs:
------
-
-- facebook-login -> does not show user name
-
 Features:
 ---------
 
