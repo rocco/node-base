@@ -90,7 +90,7 @@ app
 	// compresses responses with gzip/deflate
 	.use(compression())
 	// 
-	.use(require('stylus').middleware({
+	.use(stylus.middleware({
 		src: __dirname + '/public',
 		compress: true
 	}))

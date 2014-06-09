@@ -1,14 +1,20 @@
 TODOS
 =====
 
-- passport integration
-- lockit evaluation/integration
+Bugs:
+-----
+
+- facebook-login -> does not show user name
+
+Features:
+---------
+
 - schema validation
-- add mocha tests
+- add more mocha tests
 - deployment scripts/integration
 - .env file as seen on https://github.com/mozilla/appmaker
-- put on npm
-- create generator for yeoman
+- put on npm?
+- create generator for yeoman?
 
 Frontend:
 ---------
@@ -22,4 +28,5 @@ Maybes:
 
 - "connect-redis" as example?
 - "remember me" option on login http://stackoverflow.com/questions/244882/what-is-the-best-way-to-implement-remember-me-for-a-website
+- lockit evaluation/integration
 

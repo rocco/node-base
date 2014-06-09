@@ -3,10 +3,10 @@ node-base
 
 [![Build Status](https://travis-ci.org/rocco/node-base.png?branch=master)](https://travis-ci.org/rocco/node-base)
 
-This is an example node.js app using:
+This is an example node.js app using mainly:
 
 - "express" (duh) with jade templates (easily changeable)
-- "everyauth" for various authentication possibilities (we cover facebook and twitter)
+- "passport" for various authentication possibilities (we cover facebook and twitter)
 - "mongoose" for mongodb connectivity
 - "connect-mongo" for persistent sessions
 
@@ -22,8 +22,8 @@ The project also tries to include a complete setup including things like:
 
 - extensive inline documentation trying to make clear whats going on
 - clean and simple structure with config, controllers, models and views
-- facebook and twitter authentication through everyauth
-- users are stored in mongodb
+- facebook and twitter authentication via passport
+- users are stored to mongodb
 - persistent sessions in mongodb (you're still logged in after server reboots)
 - express config examples for development and production modes
 - express access logger (just like regular web server logs)
@@ -31,11 +31,12 @@ The project also tries to include a complete setup including things like:
 - custom middleware example
 - loading of static assets
 - custom favicon
+- stylus styles
 
 ### Getting started
 
 If you want to use my existing node-base-apps on facebook and twitter to login using their OAuth mechanism, 
-please make sure you serve the app through your localhost accessible via localhost.com!
+please make sure you serve the app through your localhost accessible via "localhost.com"!
 
 **You need to make an /etc/hosts entry for localhost.com like this**:
 
@@ -43,8 +44,8 @@ please make sure you serve the app through your localhost accessible via localho
 
 #### Other necessary steps
 
-- do a "npm update" within this directory to load dependencies to ./node_modules/
-- add hosts entry: localhost.com (then you can use the provided oauth keys)
+- initially do a "npm install" or "npm update" within this directory to load dependencies to ./node_modules/
+- add hosts entry: localhost.com (then you can use provided OAuth keys)
 - make sure mongodb is running on 127.0.0.1 (change in config/index.js): run `mongod &` to start the daemon
 - maybe set NODE_ENV environment var, see server.js source (falls back to "development")
 - start the node-base app with `node server.js`
