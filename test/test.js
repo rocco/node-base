@@ -24,7 +24,7 @@ describe('node-base', function () {
 			.get('/')
 			.end(function (err, res) {
 				res.statusCode.should.equal(200);
-				res.text.should.include('<h2>Not Authenticated</h2>');
+				res.text.should.include('<h1>Not Authenticated</h1>');
 				done();
 			});
 	});
