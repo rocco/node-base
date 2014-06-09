@@ -1,16 +1,20 @@
-/*
- * index controller
- */
+/* /index controller */
 module.exports = function () {
 	'use strict';
 
 	// we return the actual routing function
 	return function (req, res) {
 
-		// everyauth data is in res.locals.everyauth
+		if (req.session.messages.index) {
+			// set session value to template vars
+			res.locals.indexmessage = req.session.messages.index;
+			// reset message
+			req.session.messages = {};
+		}
+		
 
-		// if logged in go to /app otherwise render index
-		if (res.locals.everyauth.loggedIn === true) {
+		// if authenticated (=== logged in) go to /app otherwise render index
+		if (req.isAuthenticated()) {
 			res.redirect('/app');
 		} else {
 			// not logged in - go home

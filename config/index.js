@@ -15,8 +15,8 @@ module.exports = {
 		}
 	},
 
-	// everyauth config
-	everyauth: {
+	// auth provider config
+	auth: {
 		// facebook
 		facebook: {
 			appId:     '330598913753196', // app called "Node-Base Login"

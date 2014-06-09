@@ -1,21 +1,64 @@
-doctype
+doctype html
 html
 
 	head
+		//- should be set dynamically
 		title node-base
 
-		//- load a remote resource
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(name="csrf-token", content=_csrf)
 
-		//- load a resource from our www folder
-		script(type="text/javascript", src="/js/client.js")
+		//- bootstrap styles
+		link(href="/bootstrap/3.1.1-dist/css/bootstrap.min.css" rel="stylesheet")
+		link(href="/bootstrap/3.1.1-dist/css/bootstrap-theme.min.css" rel="stylesheet")
 
-	body
-		ul#menu
-			li: a(href='/app') App Home
+		//- app styles
+		link(href="/css/styles.css" rel="stylesheet")
 
-			if userId
-				li: a(href='/user') User Data for #{user.name}
-				li: a(href='/logout') Log Out
+	body(role="document")
 
-		block content
+		div(class="navbar navbar-inverse navbar-fixed-top" role="navigation")
+			div(class="container")
+				div(class="navbar-header")
+
+					button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse")
+						span(class="sr-only") Toggle navigation
+						span(class="icon-bar")
+						span(class="icon-bar")
+						span(class="icon-bar")
+
+					a(class="navbar-brand" href="/") Node-Base
+
+				//- collapsible menu on small screens
+				div(class="navbar-collapse collapse")
+
+					ul(class="nav navbar-nav")
+
+						//- general menu items
+						li(class="active"): a(href='/app') App Home
+
+						//- this is only available when logged in
+						if userId
+							li: a(href='#something') Something
+
+							li(class="dropdown")
+								a(href="#" class="dropdown-toggle" data-toggle="dropdown") #{userData.name}
+									b(class="caret")
+								ul(class="dropdown-menu")
+									li
+										a(href="/user") User Data
+									li
+										a(href="#settings") Something
+									li(class="divider")
+									li(class="dropdown-header") Actions
+									li: a(href='/logout') Log Out
+
+		div(class="container theme-showcase" role="main")
+			block content
+
+		//- JavaScript at the end of the body, so initial page loads faster (JS blocks loading)
+		script(src='/jquery/1.11.0/jquery.min.js')
+		script(src='/bootstrap/3.1.1-dist/js/bootstrap.min.js')
+		script(src='/js/client.js')

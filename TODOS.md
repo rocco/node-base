@@ -23,7 +23,3 @@ Maybes:
 - "connect-redis" as example?
 - "remember me" option on login http://stackoverflow.com/questions/244882/what-is-the-best-way-to-implement-remember-me-for-a-website
 
-
-New Sources:
-------------
-s

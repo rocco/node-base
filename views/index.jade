@@ -1,7 +1,14 @@
 extends layout
 block content
 
-	h2 Not Authenticated
+	if indexmessage
+		//- this can only be a success
+		div(class="alert alert-success alert-dismissable alert-autohide")
+			button(type="button" class="close" data-dismiss="alert" aria-hidden="true") &times;
+			= indexmessage
+
+
+	h1 Not Authenticated
 
 	p Please login using one of the following providers:
 

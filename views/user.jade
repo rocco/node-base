@@ -1,12 +1,12 @@
 extends layout
 block content
 
-	h2 Hello #{userData.name}
+	h1 Hello #{userData.name}
 
-	- if(everyauth.facebook)
+	- if(userData.facebook)
 		p You logged in via Facebook.
 
-	- if(everyauth.twitter)
+	- if(userData.twitter)
 		p You logged in via Twitter.
 
 	h3 User Data in DB

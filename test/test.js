@@ -1,6 +1,7 @@
 /*global describe, before, it */
+'use strict';
 var request = require('supertest');
-var should = require('should');
+//var should = require('should');
 
 /* set env before loading the server */
 process.env.NODE_ENV = 'testing';
@@ -9,7 +10,6 @@ process.env.NODE_ENV = 'testing';
 var server = require('../server.js');
 
 describe('node-base', function () {
-	'use strict';
 
 	before(function (done) {
 

@@ -1,6 +1,4 @@
-/**
- * user model
- */
+/* user model */
 module.exports = function (mongoose) {
 	'use strict';
 
@@ -14,7 +12,7 @@ module.exports = function (mongoose) {
 		facebook: {},
 		twitter_id: String,
 		twitter: {}
-		// add more everyauth provider specific properties here
+		// add more auth provider specific properties here
 	});
 
 	// add methods to the schema here if needed
