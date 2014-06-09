@@ -1,7 +1,9 @@
-/*global describe, before, it */
+/*global describe, before, it*/
 'use strict';
 var request = require('supertest');
+/*jshint ignore:start*/
 var should  = require('should');
+/*jshint ignore:end*/
 
 /* set env before loading the server */
 process.env.NODE_ENV = 'testing';
