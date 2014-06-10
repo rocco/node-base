@@ -1,6 +1,5 @@
 {
     "globals": {},
-
     "node" : true,
     "browser" : false,
     "strict": true,

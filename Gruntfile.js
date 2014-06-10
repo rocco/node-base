@@ -1,12 +1,14 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	'use strict';
 
 	// grunt config
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		jshint: {
-			jshintrc: '.jshintrc',
-			files: ['Gruntfile.js', 'server.js', 'config/everyauth.js', 'config/index.js', 'config/mongoose.js', 'test/*.js']
+			options: {
+				jshintrc: '.jshintrc'
+			},
+			files: ['Gruntfile.js', 'server.js', 'config/*.js', 'controllers/*.js', 'models/*.js', 'test/*.js']
 		},
 		mochaTest: {
 			test: {

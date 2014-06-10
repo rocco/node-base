@@ -212,13 +212,13 @@ app.get('/user', passportConfig.isAuth, require('./controllers/user.js')(mongoos
 
 // passport Twitter auth
 app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), function(req, res) {
+app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), function (req, res) {
 	res.redirect(req.session.returnTo || '/');
 });
 
 // passport Facebook auth
 app.get('/auth/facebook', passport.authenticate('facebook'));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function (req, res) {
 	res.redirect(req.session.returnTo || '/');
 });
 
