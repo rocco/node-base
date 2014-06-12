@@ -1,6 +1,7 @@
-/* /logout controller */
+'use strict';
+
+/* /logout route controller */
 module.exports = function () {
-	'use strict';
 
 	return function (req, res) {
 		req.session.messages.index = 'Successfully Logged Out';

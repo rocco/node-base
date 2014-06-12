@@ -1,6 +1,7 @@
-/* /index controller */
+'use strict';
+
+/* /index route controller */
 module.exports = function () {
-	'use strict';
 
 	// we return the actual routing function
 	return function (req, res) {

@@ -1,6 +1,7 @@
+'use strict';
+
 /* passport config */
 module.exports = function (passport, config, UserModel) {
-	'use strict';
 
 	var TwitterStrategy = require('passport-twitter').Strategy;
 	var FacebookStrategy = require('passport-facebook').Strategy;

@@ -1,7 +1,11 @@
 'use strict';
 
 /* load all required modules first */
-var config         = require('./config/index.js'),
+var // app env
+	appPort        = process.env.PORT || 3001,
+	appMode        = process.env.NODE_ENV || 'development',
+	// app config
+	config         = require('./config/index.js')(appMode),
 	express        = require('express'),
 	// use stylus or not if you don't want to
 	// if not, just edit /public/css/styles.css
@@ -20,10 +24,7 @@ var config         = require('./config/index.js'),
 	errorHandler   = require('errorhandler'),
 	// mongodb
 	MongoStore     = require('connect-mongo')(session),
-	mongoose       = require('mongoose'),
-	// app env  
-	appPort        = process.env.PORT || 3001,
-	appMode        = process.env.NODE_ENV || 'development';
+	mongoose       = require('mongoose');
 
 
 /* make sure appMode (process.env.NODE_ENV) is set */
@@ -42,7 +43,7 @@ process.on('SIGINT', function () {
 
 
 /* connect mongodb */
-require('./config/mongoose.js')(mongoose, config, appMode);
+require('./config/mongoose.js')(mongoose, config);
 
 
 /* load models */
@@ -75,7 +76,6 @@ $ NODE_ENV=testing node server.js
 
 from within app check via: process.env.NODE_ENV what the current value is
 */
-
 
 /* app config */
 app
@@ -132,7 +132,7 @@ app
 	// needs to go below session() and cookieParser(), 
 	// cf. http://www.senchalabs.org/connect/csrf.html
 	.use(csurf())
-	// a simple custom middleware
+	// a sample custom middleware
 	// this is used here to add the CSRF token and the logged-in user's ID to our views
 	.use(function (req, res, next) {
 
@@ -153,8 +153,7 @@ app
 				};
 			}
 
-			// set session messages to controllers
-
+			// TODO: auto-set session messages to controllers
 			next();
 		}
 	);
@@ -163,11 +162,6 @@ app
 /* special config sections for different environments */
 // development app config
 if (appMode === 'development') {
-
-	console.log('UserModel', UserModel);
-
-	// turn everyauth debug on
-	//everyauth.debug = true;
 
 	// verbose express error handler
 	app.use(errorHandler({
@@ -178,9 +172,6 @@ if (appMode === 'development') {
 
 // production app config
 if (appMode === 'production') {
-
-	// no everyauth debug output
-	//everyauth.debug = false;
 
 	// quiet express error handler
 	app.use(errorHandler());
@@ -193,6 +184,8 @@ if (appMode === 'production') {
 // this is needed due to the module returning a function object which again returns the actual function
 // in the case of index this seems bloated but it's better to do this consistently across all controllers
 // you might also strip the ".js" part from controller names, but I find files easier to spot this way
+
+// no authentication on index page
 app.get('/', require('./controllers/index.js')());
 
 // log out (no authentication required)
@@ -226,6 +219,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 /* start listening */
 app.listen(appPort);
 
+/* you may open your browser now */
 console.log('server on http://localhost.com:' + appPort + ' started running in ' + appMode + ' mode');
 
 /* by exposing app like this we can require it in other places like tests */

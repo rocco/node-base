@@ -1,6 +1,7 @@
-/* /user controller */
+'use strict';
+
+/* /user route controller */
 module.exports = function (mongoose) {
-	'use strict';
 
 	return function (req, res) {
 
@@ -13,7 +14,7 @@ module.exports = function (mongoose) {
 		UserModel.findOne({_id: req.user.id}, function (err, user) {
 			if (err) {
 				console.log('error retrieving loggedin user from db - logging out');
-				// logout to clear session - it's an everyauth provided route
+				// logout to clear session
 				res.redirect('/logout');
 			} else {
 				// render app and pass in user data

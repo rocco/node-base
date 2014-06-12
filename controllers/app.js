@@ -1,6 +1,7 @@
-/* /app controller */
+'use strict';
+
+/* /app route controller */
 module.exports = function () {
-	'use strict';
 
 	return function (req, res) {
 
