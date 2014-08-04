@@ -10,7 +10,7 @@ This is an example node.js app using:
 - "mongoose" for mongodb connectivity
 - "connect-mongo" for persistent sessions
 
-The project also tries to include a complete setup including things like:
+The project tries to include a complete setup including things like:
 
 - environment differences (development, testing, production)
 - jshint setup (but its setup really depends on your preferences)
