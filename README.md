@@ -3,7 +3,7 @@ node-base
 
 [![Build Status](https://travis-ci.org/rocco/node-base.png?branch=master)](https://travis-ci.org/rocco/node-base)
 
-This is an example node.js app using mainly:
+This is an example node.js app using:
 
 - "express" (duh) with jade templates (easily changeable)
 - "passport" for various authentication possibilities (we cover facebook and twitter)
